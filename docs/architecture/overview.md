@@ -34,14 +34,14 @@ Repository convention files at the root define baseline editing, Git, and ignore
 
 ## Main Areas
 
-- `docs/` is the single root for project documentation.
+- `README.md` is the concise repository introduction and navigation entry point.
+- `docs/` is the single root for authoritative and detailed project documentation.
 - `src/` contains production source code when implementation begins.
 - `tests/` contains automated tests.
 - `samples/` contains focused usage examples when they add value.
 - `scripts/` contains small repository operations that cannot be expressed clearly through existing project tooling.
 - `tools/` contains repository-local supporting tools when a demonstrated need exists.
 - `.github/` contains GitHub-specific configuration, excluding CI workflows in this foundation.
-- `README.md` introduces the repository and directs readers to focused knowledge.
 - `mk.json` provides small, machine-readable template metadata and documentation entry points.
 
 ## Dependency Direction
@@ -52,7 +52,7 @@ Documentation describes the repository; it does not create a runtime dependency.
 
 ## Documentation Model
 
-All documentation lives under `docs/`, organized by purpose:
+Authoritative and detailed project documentation lives under `docs/`, organized by purpose:
 
 - `project/` defines mission, goals, constraints, and scope.
 - `architecture/` describes structural boundaries and dependency decisions.

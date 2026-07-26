@@ -5,12 +5,17 @@ Thumbs.db
 *.swo
 *~
 .idea/
-.vscode/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/settings.json
 
 # Local configuration and secrets
 .env
 .env.*
 !.env.example
+!.env.*.example
 *.local
 
 # Build and test output

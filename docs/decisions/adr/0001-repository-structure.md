@@ -6,16 +6,15 @@ Accepted
 
 ## Context
 
-The template needs a predictable structure for implementation, verification, supporting material, and durable project knowledge. The initial structure must help contributors and AI coding assistants find authoritative context without introducing technology choices or duplicate documentation roots.
+The template needs a predictable structure for implementation, verification, supporting material, and durable project knowledge. The initial structure must help contributors and AI coding assistants find authoritative context without introducing technology choices or duplicate roots for detailed project documentation.
 
 The repository README cannot remain the complete source of project knowledge as a project grows. A separate root AI directory or a product-specific `PMS` directory would fragment knowledge and imply concerns that do not belong to this reusable template.
 
 ## Decision
 
-- Use `docs/` as the single documentation root.
+- Use `docs/` as the single root for authoritative and detailed project documentation. `README.md` remains the concise repository introduction and navigation entry point, not the complete source of project knowledge.
 - Store AI bootstrap and review guidance in `docs/ai/`, not in a root-level AI directory.
 - Do not create a `PMS` directory.
-- Use `README.md` as the concise repository introduction and navigation point, not as the complete source of project knowledge.
 - Store project intent in focused documents under `docs/project/`.
 - Store architecture knowledge in focused documents under `docs/architecture/`.
 - Store shared standards under `docs/standards/`.
@@ -26,7 +25,7 @@ The repository README cannot remain the complete source of project knowledge as 
 
 ### Positive
 
-- Contributors have one predictable documentation root.
+- Contributors have one predictable root for authoritative and detailed project documentation.
 - Project, architecture, standards, decisions, and AI guidance remain discoverable and focused.
 - The README stays concise while linking to deeper knowledge.
 - The repository can grow without adopting a technology-specific layout prematurely.
@@ -40,10 +39,10 @@ The repository README cannot remain the complete source of project knowledge as 
 ## Alternatives Considered
 
 - **Keep all knowledge in `README.md`:** Rejected because it would become difficult to navigate and maintain as the repository evolves.
-- **Create a root-level AI directory:** Rejected because AI guidance is documentation and belongs under the single documentation root.
+- **Create a root-level AI directory:** Rejected because AI guidance belongs with authoritative and detailed project documentation under `docs/`.
 - **Create a `PMS` directory:** Rejected because it is product-specific, unclear in this template, and would introduce an unnecessary structural concept.
 - **Add technology-specific project directories now:** Rejected because no implementation technology has been selected.
-- **Create multiple documentation roots:** Rejected because it would fragment authority and make context discovery harder.
+- **Create multiple roots for detailed project documentation:** Rejected because it would fragment authority and make context discovery harder.
 
 ## Review Conditions
 
