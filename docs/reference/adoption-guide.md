@@ -77,7 +77,7 @@ Update `templateVersion` only after the selected changes have been reviewed and 
 
 The template changelog records template history, not application or product releases. An adopting project may remove the copied `CHANGELOG.md` and its `changelog` entry point from `mk.json`, then consult the upstream template changelog for future synchronization reviews. It may retain the copied changelog only when that purpose remains explicit.
 
-After initial adoption, retain this guide when it will remain the project's deliberate template synchronization reference. When retained, keep its README link and `adoptionGuide` entry point in `mk.json`. Remove the guide when future template synchronization will not use it, and also remove its README link and `adoptionGuide` entry point. Do not leave stale files, broken links, or stale metadata.
+After initial adoption, make an explicit project decision about this copied guide; retention is not mandatory. Retain it when it will remain the project's deliberate template synchronization reference. When retained, keep its title and Purpose aligned with that ongoing role, and keep its README link and `adoptionGuide` entry point in `mk.json`. Remove the guide when future template synchronization will not use it, and also remove its README link and `adoptionGuide` entry point. Do not leave stale files, broken links, or stale metadata.
 
 ## Validation Checklist
 
