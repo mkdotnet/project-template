@@ -60,8 +60,10 @@ Authoritative and detailed project documentation lives under `docs/`, organized 
 - `decisions/adr/` stores accepted architectural decision records.
 - `decisions/rfc/` stores proposals that need discussion before acceptance.
 - `ai/` provides stable context and review guidance for AI-assisted work.
-- `reference/` holds durable reference material when needed.
+- `reference/` holds durable reference material and reusable document templates when needed.
 - `assets/` holds images and other files used by documentation.
+
+Reusable document templates belong under `docs/reference/templates/`. They provide guidance for creating project-specific documents; they are not an additional authoritative source for project-specific decisions.
 
 Focused documents are authoritative for their subject. Links should connect related guidance instead of repeating it.
 

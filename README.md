@@ -6,8 +6,10 @@ This repository is a reusable project template. It is not a framework, SDK, CLI,
 
 ## Start here
 
+- [Template adoption guide](docs/reference/adoption-guide.md)
 - [Project vision](docs/project/vision.md)
 - [Architecture overview](docs/architecture/overview.md)
+- [Documentation standard](docs/standards/documentation.md)
 - [Coding standards](docs/standards/coding.md)
 - [AI bootstrap](docs/ai/bootstrap.md)
 - [AI review checklist](docs/ai/review-checklist.md)
