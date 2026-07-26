@@ -6,5 +6,5 @@ This file tracks changes to the MKDotNet project template itself, not applicatio
 
 - Added a root agent discovery pointer.
 - Added template version history and synchronization guidance.
-- Added the MIT license with a copyright-holder placeholder.
+- Added the MIT License.
 - Added a lightweight pull request content template.

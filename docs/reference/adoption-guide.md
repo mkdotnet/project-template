@@ -67,9 +67,13 @@ Do not populate an empty directory merely to preserve the template structure. Ad
 
 ## Template Sync
 
-`templateVersion` records the template version used to initialize or most recently synchronize the repository. When the upstream template version increases, review its [CHANGELOG.md](../../CHANGELOG.md), evaluate each change, and apply only the changes that fit the project. Do not automatically overwrite project-specific documentation, architecture, standards, decisions, metadata, or configuration.
+`templateVersion` records the template version used to initialize the repository or the version most recently applied through a deliberate synchronization.
 
-Update `templateVersion` only after the selected changes have been reviewed and applied. Synchronization is deliberate maintenance, not an automatic upgrade mechanism. The root `CHANGELOG.md` records template history, not application or product releases; an adopting project may remove its copied changelog and consult the upstream changelog for future reviews, or retain it only when that purpose remains explicit.
+When the upstream template version increases, review the upstream template's `CHANGELOG.md`, evaluate each change, and apply only the changes that fit the project. Do not automatically overwrite project-specific documentation, architecture, standards, decisions, metadata, or configuration.
+
+Update `templateVersion` only after the selected changes have been reviewed and applied. Synchronization is deliberate maintenance, not an automatic upgrade mechanism.
+
+The template changelog records template history, not application or product releases. An adopting project may remove the copied `CHANGELOG.md` and its `changelog` entry point from `mk.json`, then consult the upstream template changelog for future synchronization reviews. It may retain the copied changelog only when that purpose remains explicit.
 
 ## Validation Checklist
 
