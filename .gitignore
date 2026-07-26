@@ -1,0 +1,27 @@
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+*.local
+
+# Build and test output
+bin/
+obj/
+artifacts/
+coverage/
+TestResults/
+
+# Temporary files and logs
+*.log
+*.tmp
+*.temp
+.cache/
