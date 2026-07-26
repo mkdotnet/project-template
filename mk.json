@@ -7,11 +7,13 @@
   "documentationRoot": "docs",
   "entryPoints": {
     "readme": "README.md",
+    "adoptionGuide": "docs/reference/adoption-guide.md",
     "vision": "docs/project/vision.md",
     "architecture": "docs/architecture/overview.md",
+    "documentationStandard": "docs/standards/documentation.md",
     "codingStandards": "docs/standards/coding.md",
     "aiBootstrap": "docs/ai/bootstrap.md",
     "aiReviewChecklist": "docs/ai/review-checklist.md"
   },
-  "templateVersion": "0.1.0"
+  "templateVersion": "0.2.0"
 }
