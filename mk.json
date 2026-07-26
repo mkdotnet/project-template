@@ -7,6 +7,7 @@
   "documentationRoot": "docs",
   "entryPoints": {
     "readme": "README.md",
+    "changelog": "CHANGELOG.md",
     "adoptionGuide": "docs/reference/adoption-guide.md",
     "vision": "docs/project/vision.md",
     "architecture": "docs/architecture/overview.md",
@@ -15,5 +16,5 @@
     "aiBootstrap": "docs/ai/bootstrap.md",
     "aiReviewChecklist": "docs/ai/review-checklist.md"
   },
-  "templateVersion": "0.2.0"
+  "templateVersion": "0.3.0"
 }

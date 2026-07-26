@@ -11,6 +11,7 @@ The repository separates durable project knowledge from implementation and suppo
 ```text
 .
 ├── .github/
+│   └── PULL_REQUEST_TEMPLATE.md
 ├── docs/
 │   ├── project/
 │   ├── architecture/
@@ -26,6 +27,9 @@ The repository separates durable project knowledge from implementation and suppo
 ├── samples/
 ├── scripts/
 ├── tools/
+├── AGENTS.md
+├── CHANGELOG.md
+├── LICENSE
 ├── README.md
 └── mk.json
 ```
@@ -36,6 +40,8 @@ Repository convention files at the root define baseline editing, Git, and ignore
 
 - `README.md` is the concise repository introduction and navigation entry point.
 - `docs/` is the single root for authoritative and detailed project documentation.
+- `AGENTS.md` is a discovery pointer to the repository introduction and authoritative AI bootstrap.
+- `CHANGELOG.md` records the version history of this template repository.
 - `src/` contains production source code when implementation begins.
 - `tests/` contains automated tests.
 - `samples/` contains focused usage examples when they add value.
@@ -69,7 +75,7 @@ Focused documents are authoritative for their subject. Links should connect rela
 
 ## AI Context Model
 
-AI coding assistants begin with `README.md`, then read the project vision, architecture overview, relevant standards, and task-specific decisions. They must inspect existing code and patterns before editing. The bootstrap guide defines this sequence; the review checklist provides a final consistency check.
+Root `AGENTS.md` is a discovery pointer only. `docs/ai/bootstrap.md` remains the authoritative instruction and reading sequence: AI coding assistants begin with `README.md`, then read the project vision, architecture overview, relevant standards, and task-specific decisions. They must inspect existing code and patterns before editing. The review checklist provides a final consistency check.
 
 ## Extension Rules
 

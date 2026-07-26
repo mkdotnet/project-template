@@ -33,6 +33,8 @@ Update [mk.json](../../mk.json):
 - Confirm `type`, `documentationRoot`, and every entry point describe files the project actually uses.
 - `templateVersion` records the template version used to initialize, or most recently synchronize, the repository. It is not the application or product release version.
 
+Review the copied [LICENSE](../../LICENSE), replace the template copyright holder with the correct copyright holder for the adopting project, and confirm that the MIT License is appropriate. Do not publish the repository without reviewing its license and copyright notice.
+
 Remove links and metadata that no longer apply. Do not retain MKDotNet template identity as if it described the adopting project.
 
 ## Step 3: Replace Template Project Context
@@ -62,6 +64,16 @@ A proposal that genuinely requires discussion before acceptance may use the [RFC
 The placeholder directories `.github/`, `src/`, `tests/`, `samples/`, `scripts/`, `tools/`, `docs/assets/`, and empty decision areas are not mandatory. Remove a placeholder and its `.gitkeep` when the area does not communicate a real project need.
 
 Do not populate an empty directory merely to preserve the template structure. Add an area later when a demonstrated requirement gives it a clear responsibility.
+
+## Template Sync
+
+`templateVersion` records the template version used to initialize the repository or the version most recently applied through a deliberate synchronization.
+
+When the upstream template version increases, review the upstream template's `CHANGELOG.md`, evaluate each change, and apply only the changes that fit the project. Do not automatically overwrite project-specific documentation, architecture, standards, decisions, metadata, or configuration.
+
+Update `templateVersion` only after the selected changes have been reviewed and applied. Synchronization is deliberate maintenance, not an automatic upgrade mechanism.
+
+The template changelog records template history, not application or product releases. An adopting project may remove the copied `CHANGELOG.md` and its `changelog` entry point from `mk.json`, then consult the upstream template changelog for future synchronization reviews. It may retain the copied changelog only when that purpose remains explicit.
 
 ## Validation Checklist
 

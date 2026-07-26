@@ -18,3 +18,5 @@ This repository is a reusable project template. It is not a framework, SDK, CLI,
 ## Using the template
 
 Keep the structure small, replace template metadata with project-specific information, and record material architectural decisions as the project evolves. The focused documents under `docs/` are the source of project knowledge; this README remains the concise repository introduction.
+
+Licensed under the [MIT License](LICENSE).
