@@ -9,7 +9,7 @@ Use this sequence before planning or editing the repository.
 3. Read the [architecture overview](../architecture/overview.md) for structure, boundaries, and extension rules.
 4. Read the [documentation standard](../standards/documentation.md) when documentation is created, moved, renamed, or materially changed.
 5. Read the standards relevant to the task, beginning with the [coding standards](../standards/coding.md).
-6. Read relevant decisions under `docs/decisions/adr/` and proposals under `docs/decisions/rfc/`.
+6. Read relevant ADRs and RFCs under `docs/decisions/` when present.
 
 ## Before Editing
 

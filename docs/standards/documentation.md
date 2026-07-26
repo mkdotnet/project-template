@@ -126,7 +126,7 @@ Do not create all possible documents in advance. The trigger is demonstrated val
 
 ## Decision Records
 
-Use an ADR for a material architectural decision whose context and consequences must remain discoverable. Use an RFC for a proposal that needs structured discussion before a decision.
+Use the [ADR template](../reference/templates/adr.md) for a material architectural decision whose context and consequences must remain discoverable. Use the [RFC template](../reference/templates/rfc.md) for a proposal that needs structured discussion before a decision.
 
 Assign numbers consistently within each record type. Keep status current. When an RFC is decided, record its final outcome and create or update an ADR if the accepted proposal establishes a durable architectural decision.
 

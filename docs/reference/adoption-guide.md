@@ -31,7 +31,7 @@ Update [mk.json](../../mk.json):
 
 - Replace `name`, `description`, and `repository` with project-specific values.
 - Confirm `type`, `documentationRoot`, and every entry point describe files the project actually uses.
-- Treat `templateVersion` as the version of the template adopted until the project defines a documented reason to use it differently.
+- `templateVersion` records the template version used to initialize, or most recently synchronize, the repository. It is not the application or product release version.
 
 Remove links and metadata that no longer apply. Do not retain MKDotNet template identity as if it described the adopting project.
 
@@ -51,9 +51,11 @@ Follow the [documentation standard](../standards/documentation.md) when changing
 
 ## Step 5: Record Material Decisions
 
-Record a material architectural decision as an ADR under `docs/decisions/adr/`. Describe the context, selected decision, consequences, alternatives, and conditions that should trigger review.
+Use the [ADR template](templates/adr.md) to record a material architectural decision under `docs/decisions/adr/`. Describe the context, selected decision, consequences, alternatives, and conditions that should trigger review.
 
-A proposal that genuinely requires discussion before acceptance may use an RFC under `docs/decisions/rfc/`. Do not create an RFC for routine implementation work or a decision that has already been made.
+The copied `docs/decisions/adr/0001-repository-structure.md` records a decision made for the template repository; do not automatically retain it as project decision history. Before normal project work begins, remove it if the decision does not represent the project, or replace it with a project-specific ADR if the project explicitly adopts that structural decision. Do not preserve template decision records merely to keep numbering or directory structure.
+
+A proposal that genuinely requires discussion before acceptance may use the [RFC template](templates/rfc.md) under `docs/decisions/rfc/`. Do not create an RFC for routine implementation work or a decision that has already been made.
 
 ## Step 6: Remove Unused Placeholder Areas
 
