@@ -1,8 +1,8 @@
-# Template Adoption Guide
+# Template Adoption and Synchronization Guide
 
 ## Purpose
 
-This guide explains how to turn the repository template into a project repository with accurate, project-specific context. The copied documentation initially describes the template itself and must be rewritten for the adopting project.
+This guide explains how to create and adopt a project repository from this template and how to review later template updates deliberately. Steps 1 through 6 cover initial adoption; the Template Sync section remains ongoing maintenance guidance after adoption.
 
 ## Adoption Principles
 
@@ -16,6 +16,8 @@ This guide explains how to turn the repository template into a project repositor
 ## Step 1: Create the Project Repository
 
 Create a new repository from the template using the repository hosting or copying method appropriate to the team. Preserve the initial structure long enough to review each area, but do not assume every placeholder must remain.
+
+Native template generation may require a repository-level setting to be enabled on the source repository, and that setting may not be represented by tracked files. Confirm the prerequisite before attempting native generation. When native template generation is explicitly required, do not silently substitute cloning or copying Git history. If the prerequisite is missing, stop and report it rather than modifying the source repository without authorization.
 
 Before implementation begins:
 
@@ -75,10 +77,14 @@ Update `templateVersion` only after the selected changes have been reviewed and 
 
 The template changelog records template history, not application or product releases. An adopting project may remove the copied `CHANGELOG.md` and its `changelog` entry point from `mk.json`, then consult the upstream template changelog for future synchronization reviews. It may retain the copied changelog only when that purpose remains explicit.
 
+After initial adoption, make an explicit project decision about this copied guide; retention is not mandatory. Retain it when it will remain the project's deliberate template synchronization reference. When retained, keep its title and Purpose aligned with that ongoing role, and keep its README link and `adoptionGuide` entry point in `mk.json`. Remove the guide when future template synchronization will not use it, and also remove its README link and `adoptionGuide` entry point. Do not leave stale files, broken links, or stale metadata.
+
 ## Validation Checklist
 
 - [ ] `README.md` identifies the adopting project and links to current entry points.
 - [ ] `mk.json` contains project-specific metadata and valid paths.
+- [ ] Native template-generation prerequisites were confirmed before generation, or a missing prerequisite was reported without substituting Git history or modifying the source repository without authorization.
+- [ ] Guide retention, its README link, and the `adoptionGuide` entry point match the project's template synchronization decision.
 - [ ] `docs/project/vision.md` describes the adopting project, not the template.
 - [ ] `docs/architecture/overview.md` reflects current boundaries and limitations.
 - [ ] `docs/standards/coding.md` matches selected technologies where choices exist.
