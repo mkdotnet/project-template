@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.0",
+  "name": "MKDotNet Project Template",
+  "description": "A minimal, documentation-first project template for maintainable and AI-ready repositories.",
+  "repository": "https://github.com/mkdotnet/project-template",
+  "type": "project-template",
+  "documentationRoot": "docs",
+  "entryPoints": {
+    "readme": "README.md",
+    "vision": "docs/project/vision.md",
+    "architecture": "docs/architecture/overview.md",
+    "codingStandards": "docs/standards/coding.md",
+    "aiBootstrap": "docs/ai/bootstrap.md",
+    "aiReviewChecklist": "docs/ai/review-checklist.md"
+  },
+  "templateVersion": "0.1.0"
+}
