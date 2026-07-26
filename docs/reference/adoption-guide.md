@@ -33,7 +33,7 @@ Update [mk.json](../../mk.json):
 - Confirm `type`, `documentationRoot`, and every entry point describe files the project actually uses.
 - `templateVersion` records the template version used to initialize, or most recently synchronize, the repository. It is not the application or product release version.
 
-Review the copied [LICENSE](../../LICENSE), replace `[Your Name / Organization]` with the correct copyright holder, and confirm that the MIT License is appropriate for the adopting project. Do not publish the repository with an unreviewed placeholder license.
+Review the copied [LICENSE](../../LICENSE), replace the template copyright holder with the correct copyright holder for the adopting project, and confirm that the MIT License is appropriate. Do not publish the repository without reviewing its license and copyright notice.
 
 Remove links and metadata that no longer apply. Do not retain MKDotNet template identity as if it described the adopting project.
 
