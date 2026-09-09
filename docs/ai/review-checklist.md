@@ -37,6 +37,7 @@ Use this checklist before presenting or publishing an AI-assisted change. Mark a
 ## Code Intelligence
 
 - [ ] Graphify was used for structural discovery when caller/dependency/impact knowledge was needed and the project integration was available.
+- [ ] At the first structural use in the session, the expected Graphify MCP integration was confirmed reachable with `graph_stats` when the adopting project uses the shared MCP setup.
 - [ ] Derived Graphify or Sourcegraph context was verified against exact source before behavioral changes.
 - [ ] Material source changes were followed by the project's required Graphify refresh/update step when applicable.
 - [ ] Stale or unavailable structural-index conditions are reported rather than hidden.
@@ -47,6 +48,8 @@ Use this checklist before presenting or publishing an AI-assisted change. Mark a
 - [ ] Inputs, authorization boundaries, and data exposure are considered where applicable.
 - [ ] New dependencies and external interactions are justified and assessed.
 - [ ] Failure messages do not expose unnecessary sensitive details.
+- [ ] If `docs/security/` is active, affected security/compliance requirements, audit obligations, exceptions, or accepted risks were reviewed and updated when materially changed.
+- [ ] No regulatory or client requirement was invented when an authoritative source was unavailable.
 
 ## Testing
 
@@ -63,6 +66,7 @@ Use this checklist before presenting or publishing an AI-assisted change. Mark a
 - [ ] Material capability changes are reflected in `docs/project/capabilities.md`.
 - [ ] Complex subsystem context is updated only when a maintained module document exists or is now justified.
 - [ ] Relative links and referenced paths are valid.
+- [ ] Repository-validation warnings were reviewed; a warning was not treated as an automatic requirement to edit project-state documentation.
 - [ ] The README remains an introduction rather than a duplicate knowledge source.
 
 ## Backward Compatibility
@@ -75,6 +79,7 @@ Use this checklist before presenting or publishing an AI-assisted change. Mark a
 
 - [ ] The change follows the [AI bootstrap](bootstrap.md).
 - [ ] Cross-agent durable knowledge follows the [collaboration contract](collaboration.md).
-- [ ] Project vision, architecture, standards, decisions, project state, module context, and implementation agree where relevant.
+- [ ] Project vision, architecture, standards, decisions, project state, module/security context, and implementation agree where relevant.
 - [ ] New guidance does not contradict or unnecessarily duplicate existing context.
+- [ ] Tool-specific configuration was reviewed for semantic consistency; CI heuristics are not treated as proof that contradiction or paraphrased drift is absent.
 - [ ] Assumptions, unresolved risks, and follow-up needs are clearly reported in durable form when another contributor will need them.

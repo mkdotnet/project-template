@@ -20,6 +20,7 @@ The template assumes a shared engineering workflow across Codex, Claude Code, an
 - [AI collaboration contract](docs/ai/collaboration.md)
 - [AI review checklist](docs/ai/review-checklist.md)
 - [Code-intelligence policy](docs/tooling/code-intelligence.md)
+- [Graphify MCP setup](docs/tooling/mcp-setup.md)
 - [Developer guides](docs/guides/developer/README.md)
 - [User guides](docs/guides/user/README.md)
 - [Module-context guidance](docs/modules/README.md)
@@ -30,5 +31,7 @@ The template assumes a shared engineering workflow across Codex, Claude Code, an
 Keep the structure small, replace template metadata and project-state documents with verified project-specific information, and record material architectural decisions as the project evolves. The focused documents under `docs/` are the source of durable project knowledge; this README remains the concise repository introduction.
 
 AI assistants should load context progressively rather than reading the whole repository. Start from `AGENTS.md` and `docs/ai/bootstrap.md`, use Graphify for structural discovery, then read only the source, tests, decisions, and module documentation relevant to the task.
+
+The template includes lightweight repository-contract validation for internal links and low-noise drift advisories. It intentionally does not prescribe application build, deployment, or runtime CI.
 
 Licensed under the [MIT License](LICENSE).

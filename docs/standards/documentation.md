@@ -9,7 +9,7 @@ This standard defines a lightweight documentation contract for this template and
 - `README.md` is the concise repository introduction and navigation entry point.
 - `docs/` is the single root for authoritative and detailed project documentation.
 - Focused documents are authoritative for their subject.
-- Source code remains authoritative for implemented behavior; documentation explains intent, state, contracts, and usage.
+- Source code remains authoritative for implemented behavior; documentation explains intent, state, contracts, requirements, and usage.
 - Link to authoritative guidance instead of duplicating it in multiple files.
 - Git history is document change history; do not require a manual revision-history section in every document.
 
@@ -29,11 +29,12 @@ The baseline documentation set is:
 - `docs/ai/collaboration.md`
 - `docs/ai/review-checklist.md`
 - `docs/tooling/code-intelligence.md`
+- `docs/tooling/mcp-setup.md`
 - `docs/guides/developer/README.md`
 - `docs/guides/user/README.md`
 - `docs/modules/README.md`
 
-ADRs are required only when a material decision exists. RFCs are appropriate only when a proposal genuinely requires discussion before acceptance. Focused module documents are created only when demonstrated subsystem complexity justifies them.
+ADRs are required only when a material decision exists. RFCs are appropriate only when a proposal genuinely requires discussion before acceptance. Focused module documents are created only when demonstrated subsystem complexity justifies them. `docs/security/` is conditional and is created only when verified security/compliance requirements justify it.
 
 ## Document Contracts
 
@@ -77,11 +78,15 @@ Canonical cross-agent knowledge ownership, handoff rules, tool-adapter boundarie
 
 ### AI Review Checklist
 
-Scope, architecture, simplicity, correctness, security, testing, documentation, project state, backward compatibility, code-intelligence freshness, and AI-context consistency.
+Scope, architecture, simplicity, correctness, security, testing, documentation, project state, backward compatibility, code-intelligence freshness, repository-validation warnings, and AI-context consistency.
 
 ### Code Intelligence
 
-Authority hierarchy and repository policy for Graphify, optional Sourcegraph, source verification, freshness, and fallback behavior.
+Authority hierarchy and repository policy for Graphify, optional Sourcegraph, source verification, freshness, fallback behavior, and the boundary between policy and tool-specific setup mechanics.
+
+### Graphify MCP Setup
+
+Current project-scoped MCP configuration locations for Claude Code, Cursor, and Codex; the common graph target; minimal stdio configuration; reachability verification; freshness boundary; shared-HTTP trigger; and a clear reminder that vendor-specific mechanics must be re-verified when tool versions change.
 
 ### Developer Guides
 
@@ -95,6 +100,23 @@ Audience-appropriate instructions for operators, administrators, customers, or e
 
 Focused subsystem purpose, boundaries, entry points, dependencies, contracts, flows, constraints, failure modes, and relevant decisions. Create only when rediscovery cost justifies maintenance cost.
 
+### Security and Compliance
+
+This is a conditional contract for documents created under `docs/security/` only when the project has verified security, privacy, contractual, regulatory, or compliance requirements that need focused durable treatment.
+
+Address, as applicable:
+
+- scope, audience, owner, and authoritative requirement sources;
+- data classification and handling constraints;
+- identities, roles, privileged boundaries, and access-control model;
+- audit trail and security-event requirements, including required retention, integrity, or traceability properties;
+- security-relevant trust boundaries and data flows, linking to architecture rather than duplicating structural descriptions;
+- secrets, key, and credential-management expectations without storing secret values;
+- contractual, regulatory, policy, or client constraints and traceability to their source requirements;
+- monitoring, incident, exception, accepted-risk, and review requirements when applicable.
+
+Do not invent regulatory requirements or copy an external framework into the repository without a verified project requirement. Keep security architecture in architecture documents, recurring implementation rules in engineering standards, and durable decisions in ADRs; link between them instead of creating parallel authority.
+
 ### Architecture Decision Record
 
 Title and number, status, context, decision, consequences, alternatives, and review conditions.
@@ -107,7 +129,8 @@ Title and number, status, summary, motivation, goals, non-goals, proposal, impac
 
 Add an optional document only when a current need cannot be expressed clearly in an existing authoritative document:
 
-- Add focused architecture documents when system context, components, deployment, security, or data flows require dedicated treatment.
+- Add focused architecture documents when system context, components, deployment, security architecture, or data flows require dedicated treatment.
+- Create `docs/security/` when verified security/compliance requirements span durable concerns such as data classification, access-control expectations, audit obligations, regulatory traceability, or accepted risks that should not be mixed into architecture or coding standards.
 - Add a module document when subsystem rediscovery is repeatedly expensive or its boundaries/contracts are not obvious from local source.
 - Add engineering standards when a selected technology or domain creates recurring decisions.
 - Add developer-guide pages when practical development or operational procedures exceed the guide index.
@@ -129,6 +152,7 @@ The trigger is demonstrated value, not structural symmetry.
 
 - Update documentation in the same change as affected behavior or architecture.
 - Update relevant project-state documents when a material milestone, deliverable, or capability changes.
+- Update security/compliance documentation when an authoritative requirement, control expectation, exception, or accepted risk materially changes.
 - Remove or revise stale guidance instead of adding contradictory guidance.
 - Report assumptions and unresolved questions explicitly.
 - Prefer concise, durable guidance over meeting notes or temporary discussion.
@@ -157,6 +181,16 @@ Every durable document must have a clear audience, purpose, and read trigger. AI
 
 If a document grows into mixed concerns, split by authority or audience. If a document becomes a task log, move the task detail to the project tracker and keep only the durable summary.
 
+## Automated Validation Boundary
+
+The baseline repository validation script intentionally automates only checks that can be made deterministic or clearly heuristic:
+
+- unresolved repository-relative Markdown links in `README.md`, `AGENTS.md`, `CLAUDE.md`, and `docs/**/*.md` are hard failures;
+- a pull request that changes `src/` without changing status/capabilities receives a non-blocking manual-confirmation warning;
+- unusually large tool-specific config files and substantial verbatim copied blocks can produce drift warnings.
+
+Automation does not prove semantic consistency, detect every paraphrased duplicate, or establish that project-state documents are substantively correct. Silence from CI must not be interpreted as proof that tool-specific configuration agrees with architecture, standards, or the AI bootstrap. Those remain review responsibilities.
+
 ## Validation Rules
 
 - Store text as UTF-8 without a byte-order mark.
@@ -167,11 +201,12 @@ If a document grows into mixed concerns, split by authority or audience. If a do
 - Confirm documentation matches current behavior and architecture.
 - Confirm project-state documents reflect verified current state.
 - Check that examples contain no secrets or sensitive data.
+- Run the repository validation script when changing documentation, agent adapters, or repository support configuration, when available.
 
 ## Avoiding Over-Documentation
 
 - Write a document only when it has a clear audience, purpose, read trigger, and maintenance value.
 - Prefer improving an existing focused document over adding a parallel source.
 - Do not preserve empty sections, speculative guidance, or temporary discussion as durable documentation.
-- Do not document hypothetical components, workflows, or extension points.
+- Do not document hypothetical components, workflows, controls, or extension points.
 - Let the repository evolve when real complexity appears rather than anticipating it.

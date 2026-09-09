@@ -16,7 +16,10 @@ Last updated: 2026-09-09
 | Shared AI context for Codex, Claude Code, and Cursor | Completed | One canonical bootstrap with thin tool adapters. |
 | Progressive AI context loading | Completed | Task-specific routing and stop rules are defined. |
 | Graphify code-intelligence baseline | Completed | Required adopting-project policy is defined. |
+| Graphify MCP consistency | Completed | Project-scoped stdio setup and reachability checks are documented for all three assistants. |
 | Sourcegraph integration | Optional | Reserved as a deliberate project-level extension. |
+| Repository-contract validation | Completed | Relative links hard-fail; project-state and tool-config drift use non-blocking advisories. |
+| Security/compliance documentation model | Completed | Conditional contract is defined; `docs/security/` is created only when a project has real requirements. |
 | Delivery-state visibility | Completed | Roadmap, status, and capabilities are defined. |
 | Developer and user documentation model | Completed | Separate audience-focused guide roots are defined. |
 | Module-context model | Completed | Created on demand for complex subsystems. |

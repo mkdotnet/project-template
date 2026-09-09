@@ -10,14 +10,14 @@ Projects created from this template should remain easy to understand, extend, de
 
 ## Problem Statement
 
-New repositories often begin with inconsistent structure, missing decisions, undocumented assumptions, and tool-specific AI instructions. As projects age, teams can also lose a reliable view of what has been completed, what remains, why a subsystem looks the way it does, and which context an engineer or AI assistant actually needs for a focused change.
+New repositories often begin with inconsistent structure, missing decisions, undocumented assumptions, and tool-specific AI instructions. As projects age, teams can also lose a reliable view of what has been completed, what remains, why a subsystem looks the way it does, which context an engineer or AI assistant actually needs for a focused change, and whether repository contracts have silently drifted.
 
 ## Target Audience
 
 - Teams starting or maintaining a software repository.
 - Maintainers who value explicit decisions and documentation-first development.
 - Contributors working interchangeably with Codex, Claude Code, Cursor, and human development workflows.
-- Long-lived projects that need recoverable architecture, delivery state, developer guidance, and user guidance.
+- Long-lived projects that need recoverable architecture, delivery state, developer guidance, user guidance, and conditional security/compliance context.
 
 ## Goals
 
@@ -25,10 +25,13 @@ New repositories often begin with inconsistent structure, missing decisions, und
 - Make project intent, architecture, standards, decisions, progress, and capabilities discoverable.
 - Provide one canonical AI context contract across supported coding assistants.
 - Make Graphify the baseline structural code-intelligence layer for adopting projects.
+- Provide one documented project-scoped Graphify MCP pattern across Claude Code, Cursor, and Codex without requiring a persistent shared server.
 - Leave an explicit optional place for Sourcegraph when its broader search or cross-repository context is justified.
 - Load AI context progressively to reduce unnecessary token use, broad exploration, and speculative redesign.
 - Support focused debugging and refactoring months or years after project start.
 - Separate durable engineering knowledge from developer instructions and end-user documentation.
+- Provide lightweight deterministic repository validation where automation is reliable, without pretending semantic review can be mechanized completely.
+- Provide a conditional security/compliance documentation contract without prescribing regulations or controls for projects that do not need them.
 - Encourage scoped changes, simple designs, and evidence-based evolution.
 - Remain neutral about runtime, language, framework, application architecture, and build tooling.
 
@@ -37,6 +40,7 @@ New repositories often begin with inconsistent structure, missing decisions, und
 - Provide an SDK, framework, CLI, package, or build system.
 - Prescribe a programming language or application architecture.
 - Include runtime dependencies, generated application projects, or deployment infrastructure.
+- Prescribe a government, regulatory, security-control, or compliance framework.
 - Duplicate vendor documentation or maintain parallel AI rule sets for each assistant.
 - Use documentation as a replacement for issue tracking, source code, tests, or Git history.
 - Anticipate every directory or abstraction a future project might need.
@@ -46,9 +50,11 @@ New repositories often begin with inconsistent structure, missing decisions, und
 - A new contributor can identify the project's purpose and main guidance quickly.
 - After months of development, a maintainer can identify current milestones and capabilities without reconstructing state from commit history.
 - AI coding assistants bootstrap from stable entry points and read only task-relevant context.
-- Codex, Claude Code, and Cursor operate from the same durable repository knowledge.
+- Codex, Claude Code, and Cursor operate from the same durable repository knowledge and can reach the same project Graphify graph when structural work is needed.
 - Structural code exploration starts with Graphify and is verified against exact source and tests before changes are made.
 - Focused debugging and refactoring can identify subsystem boundaries, callers, contracts, tests, and relevant decisions without reading the whole repository.
+- Deterministic repository-contract failures are caught automatically while context-dependent decisions remain explicit review responsibilities.
+- Projects can add focused security/compliance documentation when actual requirements exist without inheriting invented policy.
 - Projects can adopt the template without first removing unwanted runtime technology.
 - New structure and dependencies are added only in response to demonstrated needs.
 
@@ -61,7 +67,8 @@ New repositories often begin with inconsistent structure, missing decisions, und
 - Sourcegraph remains optional until a project adopts it deliberately.
 - User-facing documentation may use the language appropriate to its audience; engineering documentation should use the project's agreed engineering language.
 - Empty directories are preserved only when they communicate intentional structure.
-- No runtime dependency, CI workflow, or application implementation is included in the foundation.
+- No runtime dependency or application implementation is included in the foundation.
+- Repository-contract CI may be included when it enforces demonstrated template guarantees without coupling projects to an application build or deployment stack.
 
 ## Assumptions
 
@@ -70,6 +77,7 @@ New repositories often begin with inconsistent structure, missing decisions, und
 - Contributors and AI assistants will read the relevant guidance before making material changes.
 - Architecture decisions will be recorded when they become necessary.
 - Fine-grained execution tasks will normally live in an issue or project tracker rather than expanding summary status documents indefinitely.
+- Projects with security/compliance obligations will supply their actual authoritative requirements instead of deriving them from this template.
 
 ## Risks
 
@@ -78,6 +86,8 @@ New repositories often begin with inconsistent structure, missing decisions, und
 - Excessive documentation could obscure rather than clarify project knowledge.
 - Generated code-intelligence data may become stale if project workflows do not refresh it.
 - Tool-specific adapter files may drift if they contain copied project rules instead of pointers.
+- Lightweight CI can create false confidence if heuristic silence is mistaken for proof of semantic consistency.
+- Vendor-specific MCP mechanics can become stale as assistants evolve.
 - Generic standards may need careful refinement for a chosen technology.
 
 ## Out of Scope

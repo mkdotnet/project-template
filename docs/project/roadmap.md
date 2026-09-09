@@ -24,6 +24,13 @@ Adopting projects must replace this template-specific roadmap with their verifie
 - On-demand module-context documentation.
 - Debugging and refactoring context routes.
 
+### Repository Assurance - Completed
+
+- Deterministic repository-relative link validation in GitHub Actions.
+- Warning-only project-state and tool-config drift advisories where hard enforcement would be misleading.
+- Conditional security/compliance documentation contract without speculative content.
+- Project-scoped Graphify MCP setup and lightweight reachability verification for Claude Code, Cursor, and Codex.
+
 ### Future Template Evolution - As Needed
 
 Future changes should be driven by recurring evidence from adopting projects. Do not add a workflow, vendor, directory, or automation simply because it may become useful.

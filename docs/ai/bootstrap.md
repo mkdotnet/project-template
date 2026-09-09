@@ -56,15 +56,23 @@ Read the project vision, roadmap, status, and capabilities. Use the issue/projec
 
 Read the documentation standard and the target authoritative document or guide. Read implementation only when needed to verify documented behavior.
 
+### Security or Compliance Work
+
+If the project has activated `docs/security/`, read only the relevant security/compliance document, linked architecture/decisions, and exact implementation evidence needed for the request. Do not infer regulatory requirements from the generic template. If the area has not been activated, establish the authoritative project requirement before creating it.
+
 ### User-Guide Work
 
 Read the user-guide index, actual product behavior, and audience-specific requirements. Do not expose internal implementation detail unless it helps the user perform a supported workflow.
 
 ## Code Intelligence
 
-Follow the [code-intelligence policy](../tooling/code-intelligence.md).
+Follow the [code-intelligence policy](../tooling/code-intelligence.md) and, for adopting projects using the shared MCP surface, the [Graphify MCP setup](../tooling/mcp-setup.md).
 
 Graphify is the baseline structural discovery layer for adopting projects. Use it before broad source traversal when locating dependencies, callers, execution paths, or impact areas. Treat Graphify output as derived context: verify exact behavior in source and tests before editing.
+
+When a session will perform structural exploration, verify Graphify at the first structural use: confirm the client sees the configured MCP server and call `graph_stats`. Do not spend context or startup work probing MCP for a trivial task that does not require structural discovery.
+
+`graph_stats` establishes reachability, not freshness. If material source changes occurred after the graph was last refreshed, or graph output conflicts with source, refresh the graph according to the project workflow before relying on it.
 
 Sourcegraph is optional and should be used only when the project has adopted it and its broader search or cross-repository context materially helps the task.
 
@@ -101,6 +109,7 @@ If Graphify is unavailable or clearly stale, report that condition, use the smal
 - Update documentation in the same change when behavior, architecture, constraints, or public usage changes.
 - Update `docs/project/status.md` or `docs/project/capabilities.md` when a material deliverable or capability actually changes state.
 - Create or update focused module context only when the subsystem complexity justifies it.
+- Update activated security/compliance documentation when the change materially affects an authoritative requirement, control expectation, audit obligation, exception, or accepted risk.
 
 ## Cross-Agent Durability
 
@@ -110,6 +119,8 @@ Follow the [AI collaboration contract](collaboration.md). Do not leave project-c
 
 - Review the change with the [AI review checklist](review-checklist.md).
 - Run the relevant validation available in the repository.
+- When repository documentation or agent/tooling configuration changed, run `python scripts/validate_repository.py` when the script is available.
+- Treat CI warnings as prompts for review, not as proof that a documentation change is required.
 - Verify documentation, project state, and implementation agree where affected.
 - Refresh Graphify after material source changes when the adopting project's integration requires it.
 - Report validation performed and any validation that could not be performed.

@@ -8,6 +8,7 @@
 
 - [ ] The change is scoped to the requested outcome.
 - [ ] Relevant validation was performed.
+- [ ] Repository-contract validation passes; non-blocking warnings were reviewed rather than automatically silenced.
 - [ ] Documentation was updated when behavior, architecture, constraints, or usage changed.
 - [ ] Project status/capabilities were updated when a material deliverable or capability changed state.
 - [ ] Graphify structural data was refreshed after material source changes when required by the project's installed integration.

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.1",
+  "schemaVersion": "1.2",
   "name": "MKDotNet Project Template",
   "description": "A minimal, documentation-first project template for maintainable and AI-assisted repositories.",
   "repository": "https://github.com/mkdotnet/project-template",
@@ -20,6 +20,7 @@
     "aiCollaboration": "docs/ai/collaboration.md",
     "aiReviewChecklist": "docs/ai/review-checklist.md",
     "codeIntelligence": "docs/tooling/code-intelligence.md",
+    "graphifyMcpSetup": "docs/tooling/mcp-setup.md",
     "developerGuides": "docs/guides/developer/README.md",
     "userGuides": "docs/guides/user/README.md",
     "moduleContext": "docs/modules/README.md"
@@ -44,17 +45,26 @@
     "optional": [
       "sourcegraph"
     ],
-    "policy": "docs/tooling/code-intelligence.md"
+    "policy": "docs/tooling/code-intelligence.md",
+    "mcpSetup": "docs/tooling/mcp-setup.md"
   },
   "documentation": {
     "developerGuides": "docs/guides/developer",
     "userGuides": "docs/guides/user",
-    "moduleContext": "docs/modules"
+    "moduleContext": "docs/modules",
+    "securityCompliance": {
+      "path": "docs/security",
+      "conditional": true
+    }
   },
   "projectState": {
     "roadmap": "docs/project/roadmap.md",
     "status": "docs/project/status.md",
     "capabilities": "docs/project/capabilities.md"
   },
-  "templateVersion": "0.5.0"
+  "validation": {
+    "workflow": ".github/workflows/repository-validation.yml",
+    "script": "scripts/validate_repository.py"
+  },
+  "templateVersion": "0.6.0"
 }
