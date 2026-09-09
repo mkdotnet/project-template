@@ -85,7 +85,7 @@ function Move-Product([string]$Root,$Plan) {
     New-Item -ItemType Directory -Path $impl -Force | Out-Null
     foreach($n in $Plan.Move){
         try { Move-Item -LiteralPath (Join-Path $Root $n) -Destination (Join-Path $impl $n); Note "PASS" "Moved $n -> $ImplementationRoot/$n" }
-        catch { Note "FAIL" "Could not move $n: $($_.Exception.Message)" }
+        catch { Note "FAIL" "Could not move ${n}: $($_.Exception.Message)" }
     }
     foreach($x in $Plan.Manual){Note "MANUAL" $x}
 }
@@ -134,7 +134,7 @@ function Health([string]$Root) {
 function Report([string]$Root) {
     $dir=Join-Path $Root ".mk/reports"; New-Item -ItemType Directory -Path $dir -Force|Out-Null
     $file=Join-Path $dir ("bootstrap-{0}.md" -f (Get-Date -Format 'yyyyMMdd-HHmmss'))
-    $lines=@("# MK Bootstrap Report","","Generated: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')","","Repository: `$Root`","Implementation root: `$ImplementationRoot/`","")
+    $lines=@("# MK Bootstrap Report","","Generated: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')","","Repository: $Root","Implementation root: $ImplementationRoot/","")
     foreach($r in $script:Results){$lines+="- $r"}; Set-Content $file ($lines -join "`n") -Encoding UTF8
     Write-Host "`nReport: $file" -ForegroundColor DarkGray
     Write-Host "Daily: .\.mk\scripts\Start-MKWork.ps1  |  Test-MKProject.ps1  |  Complete-MKWork.ps1" -ForegroundColor Cyan
