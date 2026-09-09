@@ -8,7 +8,9 @@
 
 - [ ] The change is scoped to the requested outcome.
 - [ ] Relevant validation was performed.
-- [ ] Documentation was updated when behavior, architecture, or usage changed.
-- [ ] Assumptions, unresolved questions, and unperformed validation are reported.
+- [ ] Documentation was updated when behavior, architecture, constraints, or usage changed.
+- [ ] Project status/capabilities were updated when a material deliverable or capability changed state.
+- [ ] Graphify structural data was refreshed after material source changes when required by the project's installed integration.
+- [ ] Assumptions, unresolved questions, follow-up work, and unperformed validation are reported durably when relevant.
 - [ ] No secrets or sensitive data were added.
 - [ ] When AI assistance was used, the change was reviewed against `docs/ai/review-checklist.md`.
