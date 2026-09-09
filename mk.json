@@ -1,7 +1,7 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "name": "MKDotNet Project Template",
-  "description": "A minimal, documentation-first project template for maintainable and AI-ready repositories.",
+  "description": "A minimal, documentation-first project template for maintainable and AI-assisted repositories.",
   "repository": "https://github.com/mkdotnet/project-template",
   "type": "project-template",
   "documentationRoot": "docs",
@@ -10,11 +10,51 @@
     "changelog": "CHANGELOG.md",
     "adoptionGuide": "docs/reference/adoption-guide.md",
     "vision": "docs/project/vision.md",
+    "roadmap": "docs/project/roadmap.md",
+    "status": "docs/project/status.md",
+    "capabilities": "docs/project/capabilities.md",
     "architecture": "docs/architecture/overview.md",
     "documentationStandard": "docs/standards/documentation.md",
     "codingStandards": "docs/standards/coding.md",
     "aiBootstrap": "docs/ai/bootstrap.md",
-    "aiReviewChecklist": "docs/ai/review-checklist.md"
+    "aiCollaboration": "docs/ai/collaboration.md",
+    "aiReviewChecklist": "docs/ai/review-checklist.md",
+    "codeIntelligence": "docs/tooling/code-intelligence.md",
+    "developerGuides": "docs/guides/developer/README.md",
+    "userGuides": "docs/guides/user/README.md",
+    "moduleContext": "docs/modules/README.md"
   },
-  "templateVersion": "0.4.0"
+  "ai": {
+    "canonicalInstructions": "docs/ai/bootstrap.md",
+    "collaboration": "docs/ai/collaboration.md",
+    "assistants": {
+      "codex": {
+        "entryPoint": "AGENTS.md"
+      },
+      "claudeCode": {
+        "entryPoint": "CLAUDE.md"
+      },
+      "cursor": {
+        "entryPoint": "AGENTS.md"
+      }
+    }
+  },
+  "codeIntelligence": {
+    "primary": "graphify",
+    "optional": [
+      "sourcegraph"
+    ],
+    "policy": "docs/tooling/code-intelligence.md"
+  },
+  "documentation": {
+    "developerGuides": "docs/guides/developer",
+    "userGuides": "docs/guides/user",
+    "moduleContext": "docs/modules"
+  },
+  "projectState": {
+    "roadmap": "docs/project/roadmap.md",
+    "status": "docs/project/status.md",
+    "capabilities": "docs/project/capabilities.md"
+  },
+  "templateVersion": "0.5.0"
 }
