@@ -2,37 +2,22 @@
 
 ## Purpose
 
-This document is the concise current-state snapshot of the project. It answers what is completed, in progress, blocked, planned, or intentionally deferred without requiring a reader to reconstruct state from Git history.
-
-Adopting projects must replace this template-specific state with their verified project state.
-
-## Current Template State
+Concise current-state snapshot of the template. Adopting projects must replace this with verified project state.
 
 Last updated: 2026-09-09
 
 | Area | State | Notes |
 | --- | --- | --- |
-| Documentation-first repository foundation | Completed | Core repository model is established. |
-| Shared AI context for Codex, Claude Code, and Cursor | Completed | One canonical bootstrap with thin tool adapters. |
-| Progressive AI context loading | Completed | Task-specific routing and stop rules are defined. |
-| Graphify code-intelligence baseline | Completed | Required adopting-project policy is defined. |
-| Graphify MCP consistency | Completed | Project-scoped stdio setup and reachability checks are documented for all three assistants. |
-| Sourcegraph integration | Optional | Reserved as a deliberate project-level extension. |
-| Repository-contract validation | Completed | Relative links hard-fail; project-state and tool-config drift use non-blocking advisories. |
-| Security/compliance documentation model | Completed | Conditional contract is defined; `docs/security/` is created only when a project has real requirements. |
-| Delivery-state visibility | Completed | Roadmap, status, and capabilities are defined. |
-| Developer and user documentation model | Completed | Separate audience-focused guide roots are defined. |
-| Module-context model | Completed | Created on demand for complex subsystems. |
-| Runtime implementation | Not applicable | The template intentionally contains no application runtime. |
+| Governance/documentation overlay | Completed | Template no longer owns application source topology. |
+| Isolated implementation boundary | Completed | `implementation/` is the complete product workspace; internal topology is project-defined. |
+| Framework neutrality | Completed | ABP, Clean Architecture, Android, Python/ML, Unity, and polyglot layouts can retain native structure. |
+| Shared AI context | Completed | Codex, Claude Code, and Cursor share one canonical bootstrap. |
+| Progressive context loading | Completed | Task-specific routing and stop rules are defined. |
+| Graphify baseline | Completed | Structural analysis targets implementation by default. |
+| Graphify MCP consistency | Completed | Project-scoped stdio setup/reachability contract is defined. |
+| Repository validation | Completed | Relative-link validation and warning-only drift/state advisories are active. |
+| Security/compliance documentation | Conditional | Created only when verified project requirements justify it. |
+| Sourcegraph | Optional | Deliberate extension only. |
+| Runtime implementation | Not applicable | Generic template intentionally contains none. |
 
-## State Vocabulary
-
-Use a small stable vocabulary: `Planned`, `In Progress`, `Blocked`, `Completed`, `Deferred`, `Dropped`, or `Not applicable`.
-
-## Maintenance Rules
-
-- Keep this file summary-level; move fine-grained tasks to an issue or project tracker.
-- Update it when a material capability, milestone, or deliverable changes state.
-- Do not record routine commit history here.
-- Link to a focused document or tracker when more detail is required.
-- Prefer verified current state over estimated percentages.
+Use a small stable state vocabulary and keep this file summary-level rather than a task log.

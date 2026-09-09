@@ -2,98 +2,53 @@
 
 ## Mission
 
-Provide a small, reusable repository foundation that helps teams begin and maintain software projects with clear documentation, intentional structure, durable delivery state, and efficient context for people and AI coding assistants.
+Provide a reusable repository-governance foundation that keeps durable project knowledge and AI collaboration consistent while allowing each software project to preserve its natural implementation structure.
 
 ## Vision
 
-Projects created from this template should remain easy to understand, extend, debug, refactor, review, and maintain as they grow, without inheriting unnecessary runtime technology choices or speculative abstractions.
+Projects created from this template should remain easy to understand, extend, debug, refactor, review, and maintain without inheriting a framework, programming language, source-folder convention, or application architecture from the template itself.
 
-## Problem Statement
+## Problem
 
-New repositories often begin with inconsistent structure, missing decisions, undocumented assumptions, and tool-specific AI instructions. As projects age, teams can also lose a reliable view of what has been completed, what remains, why a subsystem looks the way it does, which context an engineer or AI assistant actually needs for a focused change, and whether repository contracts have silently drifted.
-
-## Target Audience
-
-- Teams starting or maintaining a software repository.
-- Maintainers who value explicit decisions and documentation-first development.
-- Contributors working interchangeably with Codex, Claude Code, Cursor, and human development workflows.
-- Long-lived projects that need recoverable architecture, delivery state, developer guidance, user guidance, and conditional security/compliance context.
+Generic repository templates often mix governance with application skeletons. That becomes confusing when real frameworks already own their topology, especially in ABP Modular Monoliths, Android/Gradle projects, Clean Architecture solutions, Python/ML systems, Unity projects, and polyglot repositories. AI assistants can also waste context when they must infer which root actually contains product code.
 
 ## Goals
 
-- Establish a clear, conventional repository structure.
-- Make project intent, architecture, standards, decisions, progress, and capabilities discoverable.
-- Provide one canonical AI context contract across supported coding assistants.
-- Make Graphify the baseline structural code-intelligence layer for adopting projects.
-- Provide one documented project-scoped Graphify MCP pattern across Claude Code, Cursor, and Codex without requiring a persistent shared server.
-- Leave an explicit optional place for Sourcegraph when its broader search or cross-repository context is justified.
-- Load AI context progressively to reduce unnecessary token use, broad exploration, and speculative redesign.
-- Support focused debugging and refactoring months or years after project start.
-- Separate durable engineering knowledge from developer instructions and end-user documentation.
-- Provide lightweight deterministic repository validation where automation is reliable, without pretending semantic review can be mechanized completely.
-- Provide a conditional security/compliance documentation contract without prescribing regulations or controls for projects that do not need them.
-- Encourage scoped changes, simple designs, and evidence-based evolution.
-- Remain neutral about runtime, language, framework, application architecture, and build tooling.
+- Keep governance/documentation/AI context technology-neutral.
+- Provide one obvious `implementation/` boundary for the complete product workspace.
+- Let the selected framework/project own all topology below that boundary.
+- Keep implementation portable and independent from governance artifacts for restore/build/test/run/package operations as far as practical.
+- Provide one canonical AI context across Codex, Claude Code, and Cursor.
+- Use Graphify for implementation-focused structural discovery while verifying exact behavior against source/tests.
+- Preserve project state, architecture, decisions, developer guidance, and user guidance over long project lifetimes.
+- Add structure and automation only in response to demonstrated needs.
 
 ## Non-Goals
 
-- Provide an SDK, framework, CLI, package, or build system.
-- Prescribe a programming language or application architecture.
-- Include runtime dependencies, generated application projects, or deployment infrastructure.
-- Prescribe a government, regulatory, security-control, or compliance framework.
-- Duplicate vendor documentation or maintain parallel AI rule sets for each assistant.
-- Use documentation as a replacement for issue tracking, source code, tests, or Git history.
-- Anticipate every directory or abstraction a future project might need.
+- Prescribe .NET, ABP, Android, Python, Unity, or any other runtime/framework.
+- Prescribe internal implementation names such as `src`, `tests`, `main`, `modules`, `app`, or `ml`.
+- Provide an SDK, CLI, application build system, deployment stack, or sample application.
+- Replace source/tests, issue tracking, or Git history with documentation.
 
 ## Success Criteria
 
-- A new contributor can identify the project's purpose and main guidance quickly.
-- After months of development, a maintainer can identify current milestones and capabilities without reconstructing state from commit history.
-- AI coding assistants bootstrap from stable entry points and read only task-relevant context.
-- Codex, Claude Code, and Cursor operate from the same durable repository knowledge and can reach the same project Graphify graph when structural work is needed.
-- Structural code exploration starts with Graphify and is verified against exact source and tests before changes are made.
-- Focused debugging and refactoring can identify subsystem boundaries, callers, contracts, tests, and relevant decisions without reading the whole repository.
-- Deterministic repository-contract failures are caught automatically while context-dependent decisions remain explicit review responsibilities.
-- Projects can add focused security/compliance documentation when actual requirements exist without inheriting invented policy.
-- Projects can adopt the template without first removing unwanted runtime technology.
-- New structure and dependencies are added only in response to demonstrated needs.
+- A developer can identify the complete product workspace immediately.
+- A framework-generated project can be placed under `implementation/` without being reorganized to satisfy the template.
+- AI assistants discover implementation location from stable metadata instead of guessing source roots.
+- A polyglot project can add multiple technology roots inside implementation without changing repository governance.
+- After months of work, current architecture, delivery state, and relevant decisions are recoverable without scanning the whole repository.
 
 ## Constraints
 
-- The template must remain minimal and runtime-technology-neutral.
-- Repository guidance must avoid duplicate or contradictory rules.
-- AI context must be progressively loaded rather than globally preloaded.
-- Graphify is a required adopting-project engineering baseline unless an explicit project decision records an exception.
-- Sourcegraph remains optional until a project adopts it deliberately.
-- User-facing documentation may use the language appropriate to its audience; engineering documentation should use the project's agreed engineering language.
-- Empty directories are preserved only when they communicate intentional structure.
-- No runtime dependency or application implementation is included in the foundation.
-- Repository-contract CI may be included when it enforces demonstrated template guarantees without coupling projects to an application build or deployment stack.
-
-## Assumptions
-
-- Adopting projects will replace template metadata and refine project-state documentation.
-- Teams will select runtime technology based on project requirements.
-- Contributors and AI assistants will read the relevant guidance before making material changes.
-- Architecture decisions will be recorded when they become necessary.
-- Fine-grained execution tasks will normally live in an issue or project tracker rather than expanding summary status documents indefinitely.
-- Projects with security/compliance obligations will supply their actual authoritative requirements instead of deriving them from this template.
+- `docs/` remains the single authoritative detailed documentation root.
+- `implementation/` remains the default product boundary; deviations require a deliberate project decision.
+- Governance must not become a runtime/build dependency of implementation.
+- Graphify is the baseline code-intelligence layer unless explicitly excepted; Sourcegraph remains optional.
+- AI context is progressively loaded rather than globally preloaded.
 
 ## Risks
 
-- Template guidance may become stale if projects change without updating it.
-- Teams may treat suggested directories as mandatory even when unnecessary.
-- Excessive documentation could obscure rather than clarify project knowledge.
-- Generated code-intelligence data may become stale if project workflows do not refresh it.
-- Tool-specific adapter files may drift if they contain copied project rules instead of pointers.
-- Lightweight CI can create false confidence if heuristic silence is mistaken for proof of semantic consistency.
-- Vendor-specific MCP mechanics can become stale as assistants evolve.
-- Generic standards may need careful refinement for a chosen technology.
-
-## Out of Scope
-
-- Product requirements for projects created from the template.
-- Runtime implementation and sample applications.
-- Package, release, deployment, and operational strategies.
-- Organization-specific governance and compliance controls.
-- Duplicated vendor-specific AI prompts or generated integration internals.
+- Some tools may assume their project file is at repository root and need to be opened explicitly from inside `implementation/`.
+- Teams may accidentally place product support files back at repository root, weakening portability.
+- Documentation or generated code-intelligence data can become stale without maintenance.
+- Over-documentation can obscure rather than clarify project knowledge.

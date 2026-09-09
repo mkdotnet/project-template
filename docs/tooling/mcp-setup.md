@@ -2,126 +2,64 @@
 
 ## Purpose
 
-This document defines the current project-scoped mechanics for exposing one repository's Graphify graph to Claude Code, Cursor, and Codex through MCP. The durable policy remains in [code-intelligence.md](code-intelligence.md); this file contains vendor-specific setup details that must be re-verified when those tools change.
+This document defines current project-scoped mechanics for exposing one project's Graphify implementation graph to Claude Code, Cursor, and Codex. Durable policy remains in [code-intelligence.md](code-intelligence.md). Vendor mechanics must be re-verified when tools change.
 
-Configuration locations and commands below were verified against official documentation on 2026-09-09.
+Configuration locations below were last verified on 2026-09-09.
 
 ## Durable Rule
 
-For adopting projects:
+- Map the product implementation root from `mk.json`; the template default is `implementation/`.
+- Keep one authoritative repository-local graph at `graphify-out/graph.json`.
+- Use project-scoped MCP configuration for Claude Code, Cursor, and Codex.
+- Default to independent local stdio processes pointing at the same graph.
+- Confirm MCP reachability before structural exploration; treat freshness separately.
+- Use shared HTTP only after a real multi-client/multi-machine need exists.
 
-- build and maintain one authoritative repository graph at `graphify-out/graph.json`;
-- use project-scoped MCP configuration for Claude Code, Cursor, and Codex;
-- default to independent local stdio MCP processes;
-- point all three clients at the same graph output;
-- confirm Graphify is reachable before structural exploration;
-- treat source and tests as authoritative for exact behavior;
-- use shared HTTP only after a real multi-client or multi-machine need is demonstrated.
+## Build and Refresh
 
-The rule above is durable. File locations and CLI syntax below are vendor mechanics and may change.
+From repository root, map only the implementation boundary by default:
 
-## Prerequisites
+```text
+/graphify implementation
+```
 
-1. Install Graphify with its MCP support using the currently supported Graphify installation method. Graphify currently documents:
+For an incremental refresh after material implementation changes:
 
-   `uv tool install "graphifyy[mcp]"`
+```text
+/graphify implementation --update
+```
 
-2. Register Graphify's project-level skill/rules for the assistants you actually use, following current Graphify integration guidance.
-3. Build the project graph before enabling required MCP startup behavior. The default output is `graphify-out/graph.json`.
-4. Confirm the Graphify MCP console command is on `PATH`:
+Graphify currently writes its derived files to repository-local `graphify-out/`. Re-check current Graphify documentation if command/output behavior changes.
 
-   `graphify-mcp graphify-out/graph.json`
+## Current Project-Scoped MCP Locations
 
-Do not put credentials or machine-specific secrets in committed MCP configuration.
-
-## Current Project-Scoped Configuration Locations
-
-| Client | Project-scoped MCP location | Current verification surface |
+| Client | Project-scoped MCP location | Verification surface |
 | --- | --- | --- |
 | Claude Code | `.mcp.json` at repository root | `claude mcp get graphify`, `claude mcp list`, or `/mcp` |
 | Cursor | `.cursor/mcp.json` | Cursor MCP settings/status UI |
 | Codex | `.codex/config.toml` for trusted projects | `codex mcp list` or `/mcp` |
 
-Official references:
+The generic template does not pre-create active MCP config because no graph exists before a real implementation is mapped.
 
-- Claude Code MCP: https://docs.anthropic.com/en/docs/claude-code/mcp
-- Cursor MCP: https://cursor.com/docs/mcp
-- Codex MCP: https://developers.openai.com/codex/mcp
-- Graphify MCP tools: https://graphify.com/docs/mcp-tools
-- Graphify MCP overview: https://graphify.com/mcp
+## Common stdio target
 
-## Claude Code
-
-After the graph exists, add the project-scoped server to `.mcp.json`:
-
-```json
-{
-  "mcpServers": {
-    "graphify": {
-      "command": "graphify-mcp",
-      "args": ["graphify-out/graph.json"]
-    }
-  }
-}
-```
-
-Claude Code currently requires approval before first use of a project-scoped MCP server. Preserve that trust boundary.
-
-## Cursor
-
-Add the same stdio server to `.cursor/mcp.json`:
-
-```json
-{
-  "mcpServers": {
-    "graphify": {
-      "command": "graphify-mcp",
-      "args": ["graphify-out/graph.json"]
-    }
-  }
-}
-```
-
-Keep Graphify-owned Cursor rules separate from this MCP config. The rules guide when Graphify is used; MCP exposes the common native tool surface.
-
-## Codex
-
-For a trusted project, add this to `.codex/config.toml` after Graphify is initialized:
-
-```toml
-[mcp_servers.graphify]
-command = "graphify-mcp"
-args = ["graphify-out/graph.json"]
-required = true
-```
-
-`required = true` is intentional for an initialized adopting project because Graphify is a baseline. During initial bootstrap, configure it only after the command and graph are available.
+After Graphify MCP support is installed and `graphify-out/graph.json` exists, configure each client to run `graphify-mcp graphify-out/graph.json` using its current project-scoped format. For Codex, `required = true` is appropriate only after Graphify is initialized and intentionally required by the project.
 
 ## Lightweight Session Check
 
-When the session will perform structural exploration, dependency tracing, impact analysis, debugging, or refactoring:
+When structural exploration, dependency tracing, debugging, impact analysis, or refactoring is needed:
 
-1. Confirm the client lists `graphify` as configured/active using the client-specific status surface above.
-2. Invoke Graphify's `graph_stats` MCP tool.
-3. If the tool cannot be called, report Graphify MCP as unavailable instead of silently continuing as though the integration exists.
-4. If MCP is unavailable but urgent work must continue, follow the fallback rules in [code-intelligence.md](code-intelligence.md).
+1. Confirm the client lists `graphify` as configured/active.
+2. Invoke `graph_stats`.
+3. If unavailable, report the limitation rather than silently acting as if Graphify exists.
+4. If graph freshness is doubtful, refresh the implementation graph before relying on it.
 
-Do not run this probe for a trivial task that does not need structural discovery. Context-efficiency rules still apply.
-
-`graph_stats` proves that the expected graph server is reachable. It does not prove freshness. If material source changes have occurred since the graph was last refreshed, or source and graph disagree, run the project's normal `graphify update .` workflow before relying on structural results.
+Do not probe MCP for trivial work that does not require structural discovery.
 
 ## Shared HTTP Is a Future Alternative
 
-Graphify also supports streamable HTTP for one process serving several clients. Do not make that the default for a solo or single-machine repository.
-
-Consider shared HTTP only when a real need appears, such as multiple simultaneous machines or several clients that should share one long-running process. If the server is exposed beyond localhost, require explicit authentication, network binding, and security review before adoption.
+Do not run a persistent shared HTTP MCP server by default. Consider it only for a demonstrated need such as several simultaneous clients or machines. Exposure beyond localhost requires authentication and network-security review.
 
 ## Maintenance
 
-When Claude Code, Cursor, Codex, or Graphify is upgraded materially:
-
-- re-check the official documentation links above;
-- verify project-scoped configuration locations and syntax;
-- verify `graphify-mcp` and `graph_stats` still exist and behave as expected;
-- update this focused mechanics document if vendor behavior changed;
-- keep the policy in `code-intelligence.md` stable unless the underlying engineering decision changed.
+When Claude Code, Cursor, Codex, or Graphify changes materially, re-check current official configuration locations, command syntax, `graphify-mcp`, `graph_stats`, mapping syntax, and graph output behavior. Keep vendor mechanics here rather than duplicating them into canonical AI/project policy.

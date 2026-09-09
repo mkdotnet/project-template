@@ -2,86 +2,58 @@
 
 ## Purpose
 
-This document defines how adopting projects use structural and search-oriented code-intelligence tools without confusing derived indexes with authoritative source or creating tool-specific project knowledge silos.
+This document defines how adopting projects use structural/search code-intelligence tools without confusing derived indexes with authoritative implementation or creating tool-specific knowledge silos.
 
 ## Baseline
 
-Graphify is the required structural code-intelligence baseline for projects created from this template unless the project records an explicit justified exception.
+Graphify is the required structural code-intelligence baseline unless a project records an explicit exception. Sourcegraph is optional. Neither is a runtime product dependency.
 
-Sourcegraph is optional. Adopt it only when broader search, large-codebase navigation, or cross-repository context provides demonstrated value beyond the project's existing workflow.
+## Analysis Boundary
 
-Neither tool is a runtime application dependency.
+By default, structural code analysis targets the implementation root declared in `mk.json` (`implementation/` in the template), not the governance/documentation tree. This keeps architecture reports and queries focused on the product workspace while allowing repository-wide analysis when a task explicitly needs it.
+
+Graphify output remains repository-local under `graphify-out/` and outside `implementation/` because it is derived engineering context, not product implementation.
 
 ## Authority Hierarchy
 
-1. Source code and configuration define actual implemented behavior.
-2. Tests provide evidence of expected and validated behavior.
-3. Project documentation and decision records explain intent, contracts, boundaries, requirements, and state.
-4. Graphify provides derived structural context such as relationships, callers, dependencies, and impact paths.
-5. Sourcegraph, when adopted, provides additional search and code-context capabilities.
-6. Git history and historical collaboration records explain prior change context when current evidence is insufficient.
+1. Implementation source/configuration defines actual behavior.
+2. Tests in their owning implementation areas provide behavior evidence.
+3. Project documentation/decisions explain intent, contracts, requirements, and state.
+4. Graphify provides derived relationships, callers, dependencies, and impact paths.
+5. Optional Sourcegraph provides broader search/context.
+6. Git history explains prior change context when current evidence is insufficient.
 
-Never treat generated graph or search output as proof of exact current behavior without checking relevant source.
+Never treat generated graph/search output as proof of exact current behavior without checking implementation.
 
 ## Graphify Workflow
 
-Use Graphify when a task requires structural discovery, including:
+For structural work:
 
-- locating a subsystem or implementation entry point;
-- identifying callers and dependencies;
-- tracing likely execution paths;
-- estimating refactor impact radius;
-- locating related tests or connected components;
-- reducing broad file-by-file repository exploration.
-
-A normal focused workflow is:
-
-1. Use Graphify to identify the relevant area.
-2. Read the exact source and tests for that area.
-3. Read focused architecture, module, security, or decision context only when needed.
+1. Map/query the implementation boundary.
+2. Identify the relevant implementation files and tests.
+3. Read focused architecture/module/security/decision context only when needed.
 4. Implement and validate the smallest safe change.
-5. Refresh/update the project's Graphify data after material source changes according to the installed integration.
+5. Refresh the implementation graph after material changes when structural data will be relied on.
 
-Keep Graphify-generated project integration files and data under the ownership of Graphify. Do not manually duplicate generated vendor rules into repository standards. Commit generated artifacts only when the adopted Graphify workflow expects them to be versioned and they contain no secrets or machine-specific sensitive data.
+Current Graphify skill syntax supports mapping a path. From repository root, use `/graphify implementation` (Codex uses its corresponding skill invocation) and `/graphify implementation --update` for incremental refresh. Re-verify vendor syntax when Graphify changes.
 
 ## MCP Consistency
 
-The repository's common Graphify MCP mechanics are defined in [mcp-setup.md](mcp-setup.md).
+Use [mcp-setup.md](mcp-setup.md). Claude Code, Cursor, and Codex should point at the same repository-local `graphify-out/graph.json`, normally through independent local stdio processes.
 
-For adopting projects that use Claude Code, Cursor, and Codex, configure each client at project scope and point every client at the same repository-local `graphify-out/graph.json`. Independent local stdio processes are the default. Do not introduce a persistent shared HTTP server without a demonstrated multi-client or multi-machine need.
-
-At the first structural use in a session, confirm the expected Graphify MCP server is visible and invoke `graph_stats`. This is a lightweight reachability check, not a freshness guarantee. Skip the probe for trivial work that does not require structural discovery.
-
-Vendor-specific configuration paths and commands belong in the focused setup document, not in this policy. Re-verify those mechanics when tool versions change.
-
-## Sourcegraph
-
-Sourcegraph is an explicit optional extension, not a dormant mandatory dependency. When adopted, document project-specific setup or usage here or in a focused tooling document and record a material architecture/engineering decision if the adoption changes team workflow significantly.
-
-Use Sourcegraph when it materially improves tasks such as broad code search, multi-repository navigation, or context retrieval that Graphify and local source inspection do not address efficiently.
+At the first structural use in a session, confirm Graphify is visible and call `graph_stats`. This proves reachability/identity, not freshness.
 
 ## Freshness and Failure Handling
 
-Derived indexes can be stale.
-
-- Prefer a current Graphify index before structural analysis.
-- `graph_stats` proves MCP reachability and graph identity, not freshness.
-- If Graphify output conflicts with source, source wins and the index should be refreshed.
-- If material source changes occurred after the graph was last refreshed, update the graph before relying on structural analysis.
-- If Graphify is unavailable during a focused task, do not perform an unlimited repository scan. Use the smallest practical Graphify CLI or source-search fallback, report the limitation, and restore the structural integration when practical.
+- Prefer a current implementation graph before structural analysis.
+- If graph output conflicts with implementation, implementation wins and the graph should be refreshed.
+- If Graphify is unavailable, report it and use the smallest practical source-search fallback; do not perform an unlimited repository scan.
 - Do not block urgent diagnosis solely because optional Sourcegraph is unavailable.
 
-## Context-Efficiency Rules
+## Context Efficiency
 
-- Prefer Graphify before broad `grep`, recursive file reading, or directory-by-directory exploration when structure is the question.
-- Stop structural exploration when the affected code, contracts, and tests are sufficiently identified.
-- Do not query unrelated subsystems for completeness.
-- Do not spend session-start tokens proving Graphify availability when the task does not require structural discovery.
-- Use Git history only when current evidence leaves an important reason or constraint unexplained.
+Prefer Graphify before broad recursive search when structure is the question. Stop once affected implementation, contracts, and tests are sufficiently identified. Do not query unrelated subsystems for completeness or probe Graphify when the task does not need structural discovery.
 
 ## Security
 
-- Do not commit tool credentials, access tokens, private endpoints, or machine-specific secrets.
-- Review generated integration files before versioning them.
-- Apply repository access and data-handling requirements equally to code-intelligence services.
-- If a shared HTTP Graphify MCP server is ever exposed beyond localhost, require explicit authentication and network-security review.
+Do not commit tool credentials, tokens, private endpoints, or machine-specific secrets. Review generated integrations before versioning. Apply project data-handling requirements to code-intelligence services. Shared HTTP Graphify outside localhost requires explicit authentication/network-security review.

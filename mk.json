@@ -1,10 +1,14 @@
 {
-  "schemaVersion": "1.2",
+  "schemaVersion": "1.3",
   "name": "MKDotNet Project Template",
-  "description": "A minimal, documentation-first project template for maintainable and AI-assisted repositories.",
+  "description": "A technology-neutral repository governance and AI-context template with an isolated implementation boundary.",
   "repository": "https://github.com/mkdotnet/project-template",
   "type": "project-template",
   "documentationRoot": "docs",
+  "implementation": {
+    "root": "implementation",
+    "topology": "project-defined"
+  },
   "entryPoints": {
     "readme": "README.md",
     "changelog": "CHANGELOG.md",
@@ -29,22 +33,15 @@
     "canonicalInstructions": "docs/ai/bootstrap.md",
     "collaboration": "docs/ai/collaboration.md",
     "assistants": {
-      "codex": {
-        "entryPoint": "AGENTS.md"
-      },
-      "claudeCode": {
-        "entryPoint": "CLAUDE.md"
-      },
-      "cursor": {
-        "entryPoint": "AGENTS.md"
-      }
+      "codex": { "entryPoint": "AGENTS.md" },
+      "claudeCode": { "entryPoint": "CLAUDE.md" },
+      "cursor": { "entryPoint": "AGENTS.md" }
     }
   },
   "codeIntelligence": {
     "primary": "graphify",
-    "optional": [
-      "sourcegraph"
-    ],
+    "analysisRoot": "implementation",
+    "optional": ["sourcegraph"],
     "policy": "docs/tooling/code-intelligence.md",
     "mcpSetup": "docs/tooling/mcp-setup.md"
   },
@@ -64,7 +61,7 @@
   },
   "validation": {
     "workflow": ".github/workflows/repository-validation.yml",
-    "script": "scripts/validate_repository.py"
+    "script": ".github/scripts/validate_repository.py"
   },
-  "templateVersion": "0.6.0"
+  "templateVersion": "0.7.0"
 }

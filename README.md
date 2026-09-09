@@ -1,10 +1,23 @@
 # MKDotNet Project Template
 
-A minimal, documentation-first foundation for maintainable, AI-assisted software repositories.
+A technology-neutral repository governance, documentation, and AI-context foundation for maintainable software projects.
 
-This repository is a reusable project template. It is not a framework, SDK, CLI, package, or build system. Projects created from it should add only the technology and automation their actual requirements justify.
+This template does **not** define application source topology. The complete product implementation lives under [`implementation/`](implementation/), while the framework or project generator owns everything inside that boundary. A .NET Clean Architecture solution, ABP Modular Monolith, Android application, Python/ML project, Unity project, or polyglot system can therefore keep its native structure without competing with the template.
 
-The template assumes a shared engineering workflow across Codex, Claude Code, and Cursor, with one canonical repository context. Graphify is the baseline structural code-intelligence layer for adopting projects; Sourcegraph has an explicit optional place when broader search or cross-repository context is justified.
+## Repository model
+
+```text
+repository/
+├── .github/          repository automation
+├── docs/             durable project knowledge
+├── implementation/   complete product implementation; internal topology is project-defined
+├── AGENTS.md          shared AI discovery entry point
+├── CLAUDE.md          Claude Code adapter
+├── README.md
+└── mk.json            machine-readable repository contract
+```
+
+Product source, tests, samples, implementation-specific tools, solution files, framework metadata, and implementation infrastructure belong inside `implementation/` according to the conventions of the selected technology. Repository governance must not require the implementation to depend on `docs/`, AI files, Graphify output, or repository-validation tooling in order to restore, build, test, run, or package the product.
 
 ## Start here
 
@@ -24,14 +37,7 @@ The template assumes a shared engineering workflow across Codex, Claude Code, an
 - [Developer guides](docs/guides/developer/README.md)
 - [User guides](docs/guides/user/README.md)
 - [Module-context guidance](docs/modules/README.md)
-- [Repository structure decision](docs/decisions/adr/0001-repository-structure.md)
 
-## Using the template
-
-Keep the structure small, replace template metadata and project-state documents with verified project-specific information, and record material architectural decisions as the project evolves. The focused documents under `docs/` are the source of durable project knowledge; this README remains the concise repository introduction.
-
-AI assistants should load context progressively rather than reading the whole repository. Start from `AGENTS.md` and `docs/ai/bootstrap.md`, use Graphify for structural discovery, then read only the source, tests, decisions, and module documentation relevant to the task.
-
-The template includes lightweight repository-contract validation for internal links and low-noise drift advisories. It intentionally does not prescribe application build, deployment, or runtime CI.
+AI assistants should load context progressively, treat `implementation/` as the product boundary, use Graphify for structural discovery when needed, and verify exact behavior against implementation source and tests before editing.
 
 Licensed under the [MIT License](LICENSE).
