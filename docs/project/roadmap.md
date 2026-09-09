@@ -20,9 +20,16 @@ Milestone-level template evolution, not a task tracker. Adopting projects replac
 ## Implementation Isolation — Completed
 
 - One `implementation/` boundary for the complete product workspace.
-- Framework/project ownership of all internal implementation topology.
-- Removal of generic root source/test/sample/tool placeholders.
-- CI and Graphify routing based on the implementation boundary rather than `src/` assumptions.
+- Framework/project ownership of all internal topology.
+- CI and Graphify routing based on implementation rather than `src/` assumptions.
+
+## Safe Retrofit and Lifecycle Tooling — Completed
+
+- Guided root bootstrap for existing/partial repositories.
+- Conservative product migration with explicit manual-review categories.
+- Canonical `.mk/toolkit/` source and `.mk/scripts/` installed lifecycle.
+- Graphify/MCP setup, start, health, completion, and template-sync workflows.
+- Project-defined technology-specific validation commands.
 
 ## Future Evolution — As Needed
 

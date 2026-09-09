@@ -4,36 +4,41 @@
 
 This guide explains how to apply the template as a governance/documentation/AI overlay while keeping application implementation independent and framework-native.
 
+## Preferred path for an existing project
+
+For an existing or half-built repository, use the repository-root `Initialize.ps1` guided bootstrap. On Windows, `Initialize-MKProject.cmd` provides the simplest launcher for a less experienced developer.
+
+The bootstrap previews migration before moving anything, creates `implementation/`, moves ordinary framework/build/product roots there when safe, downloads the current `.mk/toolkit/` from this repository, installs runnable scripts under `.mk/scripts/`, applies missing governance files without blindly overwriting differing project-specific docs, guides Graphify/MCP setup, and runs a health check.
+
+Prefer a clean Git commit/stash before migration so the pre-migration state is easy to recover.
+
 ## Adoption Principles
 
 - The template owns repository governance and durable context, not application topology.
-- The complete product workspace lives under `implementation/`.
+- The complete product workspace lives under the implementation root recorded in `mk.json` (`implementation/` by default).
 - The selected framework/generator owns everything inside that boundary.
-- Do not reshape a framework-native solution merely to imitate another technology's folder conventions.
 - Keep implementation able to restore, build, test, run, and package without depending on repository-governance artifacts as far as practical.
 - Keep AI context progressive and durable knowledge in the repository rather than assistant chats.
-- Treat regulated/government and .NET projects as validation use cases, not as reasons to make the generic template technology-specific.
+- The template is technology-neutral; .NET/ABP, Android, Python/ML, Unity, and regulated projects are use cases rather than hard-coded assumptions.
 
-## 1. Establish Repository Identity
+## Migration classification
 
-Create the repository from this template or overlay the template onto an existing repository. Update `README.md` and `mk.json` with the real project identity. Review license/copyright before distribution.
+The guided bootstrap keeps repository/governance items at root, including Git metadata, `.github`, `.mk`, `docs`, Graphify output, assistant configuration, repository-wide Git/editor settings, README/AI entry points, and `mk.json`.
 
-Keep `mk.json` implementation metadata aligned with reality:
+Other ordinary root framework/build/product items become candidates for `implementation/`. The bootstrap refuses to guess for:
 
-```json
-"implementation": {
-  "root": "implementation",
-  "topology": "project-defined"
-}
-```
+- `.gitmodules` and submodule roots;
+- real `.env`/likely credential files;
+- private key/certificate containers;
+- symlinks/reparse points;
+- destination collisions;
+- root Markdown that may be durable project documentation rather than implementation.
 
-An adopting project may later record a more specific topology such as `abp-modular-monolith`, `clean-architecture`, `android`, or `polyglot`, but the generic template does not require those values.
+Review every `MANUAL` result after the run.
 
-## 2. Place the Complete Product Workspace Under `implementation/`
+## Implementation examples
 
-Generate or place the real project so its framework/project root is directly beneath `implementation/`.
-
-Examples:
+These are examples only:
 
 ```text
 # ABP Modular Monolith
@@ -58,66 +63,53 @@ implementation/
 
 # Polyglot
 implementation/
-├── <framework-owned .NET roots>
+├── <framework-owned roots>
 ├── ml/
 ├── contracts/
-└── <project-specific support roots>
+└── <project support roots>
 ```
 
-These are examples, not template-prescribed layouts. Keep tests, samples, implementation tools/scripts, project files, contracts, and implementation infrastructure with the owning project/framework. Do not recreate generic root `src/`, `tests/`, `samples/`, or `tools/`.
+## Project context
 
-## 3. Replace Project Context
+Rewrite project vision, roadmap, status, capabilities, and architecture for the adopting project. Existing differing project-specific documents are not overwritten automatically; merge upstream guidance deliberately.
 
-Rewrite project vision, roadmap, status, capabilities, and architecture overview for the adopting project. Document actual implementation topology only when it is useful; do not preserve template examples as if they were requirements.
+Refine coding standards after technologies are chosen. Activate `docs/security/` only when verified requirements justify it.
 
-Refine coding standards after technologies are chosen. Activate `docs/security/` only when verified security/compliance requirements justify it.
+## Shared AI and Graphify
 
-## 4. Establish Shared AI and Code Intelligence
+Keep `AGENTS.md` and `CLAUDE.md` as thin adapters to the canonical bootstrap. Initialize Graphify against the implementation boundary rather than the governance tree. Follow the [code-intelligence policy](../tooling/code-intelligence.md), [Graphify MCP setup](../tooling/mcp-setup.md), and [lifecycle toolkit](../tooling/lifecycle-scripts.md).
 
-Keep `AGENTS.md` and `CLAUDE.md` thin adapters to the canonical bootstrap. Initialize Graphify against the implementation boundary, not the governance/docs tree, unless a specific task requires repository-wide analysis.
+Do not create active Graphify MCP configuration that points to a missing graph. Build the graph first, then configure/reload clients and verify `graph_stats` when structural work begins.
 
-From repository root, the intended baseline is to map `implementation/` and keep the resulting `graphify-out/` at repository level. Follow [code-intelligence policy](../tooling/code-intelligence.md) and [Graphify MCP setup](../tooling/mcp-setup.md), re-verifying vendor mechanics when tools change.
+## Repository and implementation validation
 
-Do not activate Sourcegraph merely because the template names it.
+Repository-contract validation is template-owned. The exact local validator path is recorded in `mk.json.validation.script`; the template repository itself uses `.github/scripts/validate_repository.py`, while toolkit-installed adopting projects normally use `.mk/scripts/validate_repository.py`.
 
-## 5. Human Documentation and Decisions
+Application build/test/deployment checks remain project-defined. Add `implementation.validation.commands` only after the project's real commands are known.
 
-Use developer guides for practical implementation procedures and user guides for operators/end users. Add module documents only when subsystem rediscovery becomes expensive. Use ADRs for durable decisions and RFCs only for proposals that need structured discussion.
+## Daily lifecycle
 
-Template ADRs may be removed or replaced when the adopting project does not retain those decisions; do not leave stale accepted decisions that contradict project reality.
+```powershell
+.\.mk\scripts\Start-MKWork.ps1
+.\.mk\scripts\Test-MKProject.ps1
+.\.mk\scripts\Complete-MKWork.ps1
+```
 
-## 6. Repository Validation
-
-The baseline GitHub workflow and `.github/scripts/validate_repository.py` validate repository contracts. The validator reads the implementation root from `mk.json`; it does not assume `src/`.
-
-Application-specific build/test/deployment CI remains project-defined and should execute against the framework/project inside `implementation/`.
+Use `Sync-MKTemplate.ps1` periodically to compare with upstream and update template-owned tooling deliberately.
 
 ## Ongoing Definition of Done
 
-For a material change, apply the smallest relevant set:
-
-- implementation/configuration changed;
-- tests/validation changed and run;
-- affected architecture, guide, module, or security documentation updated;
-- status/capabilities updated when material delivery state changed;
-- Graphify refreshed after material implementation changes when structural data is used;
-- repository-contract validation passed and warnings were reviewed;
-- unresolved follow-up work recorded durably.
-
-## Template Sync
-
-`templateVersion` records the template version last adopted/synchronized, not the product release. Review upstream changelog changes deliberately and never overwrite project-specific implementation, architecture, standards, decisions, security context, AI/tool config, or project state automatically.
+For a material change, apply the smallest relevant set: implementation/config updated; relevant tests/validation run; docs/state updated when materially affected; Graphify refreshed when structural data is used; repository validation passed; and unresolved follow-up recorded durably.
 
 ## Validation Checklist
 
 - [ ] Repository identity and `mk.json` describe the real project.
-- [ ] `implementation/` contains the complete framework/project workspace and its real topology.
-- [ ] Product build/test/run does not depend on template governance artifacts without an explicit documented exception.
+- [ ] `implementation/` contains the complete real product workspace.
+- [ ] Product build/test/run does not depend on governance files without an explicit exception.
 - [ ] No generic root `src/`, `tests/`, `samples/`, or `tools/` was introduced by template convention.
-- [ ] Project vision, roadmap, status, capabilities, and architecture reflect current reality.
+- [ ] `MANUAL` migration items were reviewed.
+- [ ] Project vision, roadmap, status, capabilities, and architecture reflect reality.
 - [ ] Graphify analyzes the intended implementation boundary and MCP is reachable when used.
 - [ ] AI adapters remain thin and consistent.
-- [ ] Conditional security documentation exists only when justified.
 - [ ] Repository validation passes and warnings were reviewed.
-- [ ] Fine-grained work remains in the tracker rather than status documents.
 - [ ] No secrets or sensitive data were committed.

@@ -19,12 +19,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Parse MK PowerShell bootstrap and toolkit
+      - name: Parse installed MK PowerShell toolkit
         shell: pwsh
         run: |
           $failed = $false
-          $files = @("Initialize.ps1")
-          $files += @(Get-ChildItem ".mk/toolkit" -File | Where-Object { $_.Extension -in @(".ps1", ".psm1") } | ForEach-Object { $_.FullName })
+          $files = @(Get-ChildItem ".mk/scripts" -File | Where-Object { $_.Extension -in @(".ps1", ".psm1") } | ForEach-Object { $_.FullName })
           foreach ($file in $files) {
             $tokens = $null
             $errors = $null
@@ -39,11 +38,11 @@ jobs:
 
       - name: Validate repository contracts
         if: github.event_name != 'pull_request'
-        run: python3 .github/scripts/validate_repository.py
+        run: python3 .mk/scripts/validate_repository.py
 
       - name: Validate repository contracts and PR project state
         if: github.event_name == 'pull_request'
         run: >-
-          python3 .github/scripts/validate_repository.py
+          python3 .mk/scripts/validate_repository.py
           --base "${{ github.event.pull_request.base.sha }}"
           --head "${{ github.event.pull_request.head.sha }}"

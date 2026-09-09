@@ -1,13 +1,20 @@
 {
-  "schemaVersion": "1.3",
+  "schemaVersion": "1.4",
   "name": "MKDotNet Project Template",
-  "description": "A technology-neutral repository governance and AI-context template with an isolated implementation boundary.",
+  "description": "A technology-neutral repository governance and AI-context template with an isolated implementation boundary and guided lifecycle tooling.",
   "repository": "https://github.com/mkdotnet/project-template",
   "type": "project-template",
   "documentationRoot": "docs",
   "implementation": {
     "root": "implementation",
     "topology": "project-defined"
+  },
+  "toolkit": {
+    "bootstrap": "Initialize.ps1",
+    "windowsLauncher": "Initialize-MKProject.cmd",
+    "source": ".mk/toolkit",
+    "installedPath": ".mk/scripts",
+    "reportsPath": ".mk/reports"
   },
   "entryPoints": {
     "readme": "README.md",
@@ -25,6 +32,7 @@
     "aiReviewChecklist": "docs/ai/review-checklist.md",
     "codeIntelligence": "docs/tooling/code-intelligence.md",
     "graphifyMcpSetup": "docs/tooling/mcp-setup.md",
+    "lifecycleToolkit": "docs/tooling/lifecycle-scripts.md",
     "developerGuides": "docs/guides/developer/README.md",
     "userGuides": "docs/guides/user/README.md",
     "moduleContext": "docs/modules/README.md"
@@ -49,10 +57,7 @@
     "developerGuides": "docs/guides/developer",
     "userGuides": "docs/guides/user",
     "moduleContext": "docs/modules",
-    "securityCompliance": {
-      "path": "docs/security",
-      "conditional": true
-    }
+    "securityCompliance": { "path": "docs/security", "conditional": true }
   },
   "projectState": {
     "roadmap": "docs/project/roadmap.md",
@@ -63,5 +68,5 @@
     "workflow": ".github/workflows/repository-validation.yml",
     "script": ".github/scripts/validate_repository.py"
   },
-  "templateVersion": "0.7.0"
+  "templateVersion": "0.8.0"
 }

@@ -30,3 +30,6 @@ TestResults/
 *.tmp
 *.temp
 .cache/
+
+# MK local reports
+.mk/reports/
